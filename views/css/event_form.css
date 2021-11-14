@@ -1,0 +1,54 @@
+#fundal
+{
+    filter: brightness(60%);
+}
+#antet_form
+{
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    margin-top: 80px;
+}
+form
+{
+    width: 690px;
+    max-width: 100%;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+
+    box-shadow: 0px 0px 16px rgba(34,34,34,0.6);
+    backdrop-filter: blur(7px);
+
+    color: #CED4DA;
+}
+.form-control, .form-select
+{
+    background-color: rgba(0,0,0,0.10) !important;
+    color: #CED4DA !important;
+}
+.form-control:focus, .form-select:focus
+{
+    box-shadow: 0 0 0 0.13rem rgba(255, 255, 255, 0.75);
+    border-color: #CED4DA;
+}
+.form-select option
+{
+    color: black;
+}
+.btn
+{
+    background-color: #2F2F2F;
+    color: #CED4DA;
+    border: 1px solid #CED4DA;
+}
+.btn:hover
+{
+    color: white;
+    background-color: black;
+}
+form p span
+{
+    color: gold;
+}

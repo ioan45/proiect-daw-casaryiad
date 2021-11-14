@@ -1,0 +1,39 @@
+nav #meniu
+{
+   background-color: #D8D8D8 !important;
+   color: #000000 !important;
+}
+.tabel_titlu
+{
+    margin-top: 90px;
+    color: #F0F0F0;
+}
+.container_tabel
+{
+    background-color: #D8D8D8;
+    margin-top: 60px;
+}
+.container_tabel table
+{
+    width: 100%;
+    table-layout: fixed;
+}
+.container_tabel td
+{
+    width: 50%;
+    padding: 9px 30px 9px 30px;
+    color: black;
+}
+.item_den
+{
+    font-size: larger;
+    font-weight: 500;
+}
+.item_info
+{
+    font-size: smaller;
+}
+.item_pret
+{
+    float: right;
+}

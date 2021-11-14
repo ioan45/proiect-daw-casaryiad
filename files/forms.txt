@@ -1,0 +1,32 @@
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-14 08:58:59pm
+
+ Nume: alfa
+ Prenume: alfabet
+ E-mail: sdfsdfsdfd@gfhgf.com
+ Telefon: 1231312432
+ Tip eveniment: Corporate
+ Data evenimentului: 2021-12-07
+ Numar invitati: 3
+ Observatii: g
+
+-----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-14 08:59:15pm
+
+ Nume: alfa
+ Prenume: alfabet
+ E-mail: sdfsdfsdfd@gfhgf.com
+ Telefon: 1231312432
+ Tip eveniment: Privat
+ Data evenimentului: 2021-12-09
+ Numar invitati: 2
+ Observatii: e
+
+-----------------------------------------

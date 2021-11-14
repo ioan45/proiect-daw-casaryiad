@@ -1,0 +1,55 @@
+nav #acasa
+{
+   background-color: #D8D8D8 !important;
+   color: #000000 !important;
+}
+.carousel-inner
+{
+    height: 400px;
+}
+.carousel-caption
+{
+    color: #FFFFFF;
+    top: 140px;
+}
+#welcome
+{
+   top: 110px;
+}
+#aniversare
+{
+   top: 40px;
+}
+#renovare
+{
+   top: 60px;
+}
+#aniversare h1, #renovare h1
+{
+   margin-bottom: 20px;
+}
+#nume_rest
+{
+   font-family: "Revans Medium";
+   font-size: 70px;
+}
+.container_prez
+{
+   margin-bottom: 80px;
+   background-color: #D8D8D8;
+   text-align: center;
+   vertical-align: middle;
+}
+.container_prez img
+{
+   background-color:#444444;
+   filter: drop-shadow(3px 3px 4px black);
+}
+.container_prez h3
+{
+   font-family: Copperplate Gothic;
+}
+footer
+{
+   margin-top: 0;
+}

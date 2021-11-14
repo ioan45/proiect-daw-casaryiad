@@ -1,0 +1,82 @@
+@font-face
+{
+    font-family: Montez;
+    src: url("../other_resources/Montez.ttf");
+}
+@font-face
+{
+    font-family: "Revans Medium";
+    src: url("../other_resources/RevansMedium.otf");
+}
+
+header
+{
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border: 1px solid black;
+    border-bottom: none;
+}
+header #logo
+{
+    display: block;
+    width: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: brightness(50%);
+}
+nav
+{
+    filter: drop-shadow(0px 3px 7px black);
+}
+.navbar-bg-color
+{
+    background-color: #262626;
+}
+body
+{
+    overflow-x: hidden;
+}
+#fundal
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    min-height: 100%;
+    min-width: 1300px;
+    width: 100%;
+        
+    z-index: -30;
+    filter: brightness(50%);
+}
+footer
+{
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: #262626;
+    border-top: 3px double lightgray;
+}
+footer div
+{
+    font-family: Bahnschrift;
+    color:white;
+    margin-top: 20px;
+    padding: 20px;
+    padding-top: 0;
+}
+footer p
+{
+    font-size: 1.3em;
+    text-align: center;
+}
+.footer_table td, 
+.footer_table th
+{
+    text-align: left;
+    vertical-align: top;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
