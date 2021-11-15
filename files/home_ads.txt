@@ -1,7 +1,7 @@
 <TITLE>
 	Un deceniu de activitate
 <CONTENT>
-	<P> În curând Casa Ryiad va împlini 10 ani de la prima sa farfurie servită și de la primul său eveniment organizat cu succes. Prin urmare, în acea zi prețurile întregului meniu vor scădea cu pană la 50%. De asemenea, se pregătește și un evenimentspecial ce sigur te va distra pe cinste.
+	<P> În curând Casa Ryiad va împlini 10 ani de la prima sa farfurie servită și de la primul său eveniment organizat cu succes. Prin urmare, în acea zi prețurile întregului meniu vor scădea cu pană la 50%. De asemenea, se pregătește și un eveniment special ce sigur te va distra pe cinste.
 	<P> Te așteptăm!
 <END>
 
