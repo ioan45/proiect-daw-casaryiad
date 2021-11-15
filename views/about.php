@@ -36,13 +36,14 @@
                 Aplicatia web este planificata astfel incat sa aiba 3 roluri: vizitator, client, administrator. Vizitatorul va putea 
                 doar sa priveasca ceea ce ofera restaurantul. Clientul, pe langa posibilitatile unui vizitator, va putea sa trimita formularul
                 cu privire la organizarea de eveniment. Astfel, anumite date din formular vor fi deja completate (nume, prenume, e-mail, telefon).
-                Administratorul va avea posibilitatile clientului si va putea face modificari asupra bazei de date (insert, update, delete).
+                Administratorul va avea posibilitatile clientului (totusi nu este considerat client fiindca pot fi mai multe persoane pe contul 
+                de admin., deci va trebui sa introduca date personale) si va putea face modificari asupra bazei de date (insert, update, delete).
                 Rolul de client va putea fi accesibil doar prin intermediul unui cont de utilizator creat printr-o functie de Inregistrare ce va fi
                 oferita de aplicatie (ulterior va fi necesara doar autentificarea). Rolul de administrator este valabil doar printr-un cont
                 anumit, deja existent in baza de date.
             </p>
             <p class="fs-5">
-                Diagrama Entitate-Relatie a bazei de date:
+                Diagrama Entitate-Relatie a bazei de date (baza de date corespunde doar aplicatiei web, nu a intregului restaurant):
             </p>
             <img id="diagrama" src="other_resources/diagrama-er.jpg" class="img-fluid"><br>
             <p class="fs-5">
