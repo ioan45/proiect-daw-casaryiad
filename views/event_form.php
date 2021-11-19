@@ -1,6 +1,7 @@
+<!DOCTYPE html>
+
 <?php include_once "../models/event_form_processing.php" ?>
 
-<!DOCTYPE html>
 <html lang="ro">
     <head>
         <meta charset="utf-8">
