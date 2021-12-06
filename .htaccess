@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_URI} !((\.(jpg|jpeg|png|ttf|otf|css|js)$)|(^\/proiect\/index\.php$)) [NC]
+
+RewriteRule ^(.*)$ /proiect/index.php [L]

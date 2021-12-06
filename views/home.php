@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-
-<?php include_once "../models/get_home_ads.php" ?>
-
 <html lang="ro">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css\bootstrap.min.css">
-        <link rel="stylesheet" href="css\common.css">
-        <link rel="stylesheet" href="css\home.css">
+        <link rel="stylesheet" href="/views/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/views/css/common.css">
+        <link rel="stylesheet" href="/views/css/home.css">
         <title>Casa Ryiad</title>
     </head>
     <body>
-        <img id="fundal" src="../images/main6.jpg" alt="main_img" class="img-fluid">
+        <img id="fundal" src="/images/main6.jpg" alt="main_img" class="img-fluid">
        
-        <?php include_once "common_parts/header_and_nav.html" ?>
+        <?php include_once "views/common_parts/header_and_nav.php" ?>
 
         <div class="container py-3 col-sm-8">
             <div id="news" class="carousel slide" data-bs-ride="carousel">
@@ -33,14 +30,14 @@
                     <div class="carousel-item" data-bs-interval="10000">
                         <div id="aniversare" class="carousel-caption">
                             <h1> <?= $titles[0] ?> </h1>
-                            <p> <?= $contents[0] ?> </p>
-                            <p> <?= $contents[1] ?> </p>
+                            <p> <?= $paragraphs[0][0] ?> </p>
+                            <p> <?= $paragraphs[0][1] ?> </p>
                         </div>
                     </div>
                     <div class="carousel-item" data-bs-interval="10000">
                         <div id="renovare" class="carousel-caption">
                             <h1> <?= $titles[1] ?> </h1>
-                            <p> <?= $contents[2] ?> </p>
+                            <p> <?= $paragraphs[1][0] ?> </p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +54,7 @@
 
         <section class="container-fluid container_prez font-sans-serif fs-5">
             <section class="container-fluid d-flex flex-wrap flex-md-nowrap py-5 justify-content-center">
-                <img src="../images/h_events.jpg" alt="H_Evenimente" class="img-fluid align-self-start w-50 border border-1 border-secondary rounded-3">
+                <img src="/images/h_events.jpg" alt="H_Evenimente" class="img-fluid align-self-start w-50 border border-1 border-secondary rounded-3">
                 <div class="vr d-none d-md-inline-block mx-3 mx-sm-5"></div>
                 <span class="align-self-center">
                     <h3 class="mt-3 mt-md-0">Eveniment Realizat Ca La Carte</h3><br>
@@ -82,12 +79,12 @@
                     </p>
                 </span>
                 <div class="vr d-none d-md-inline-block mx-3 mx-sm-5"></div>
-                <img src="../images/h_meniu.jpg" alt="H_Meniu" class="img-fluid align-self-start w-50 border border-1 border-secondary rounded-3">
+                <img src="/images/h_meniu.jpg" alt="H_Meniu" class="img-fluid align-self-start w-50 border border-1 border-secondary rounded-3">
             </section>
         </section>
 
-        <?php include_once "common_parts/footer.php" ?>
+        <?php include_once "views/common_parts/footer.php" ?>
 
-        <script src="js\bootstrap.min.js"></script>
+        <script src="/views/js/bootstrap.min.js"></script>
     </body>
 </html>

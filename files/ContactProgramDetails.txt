@@ -1,7 +1,7 @@
 <CONTACT>
 
 <Adresa>
-București, Sector 3 `
+București, Sector 3,
 Strada Prisaca Dornei, Nr. 15
 
 <Telefon>
@@ -10,16 +10,13 @@ Strada Prisaca Dornei, Nr. 15
 <Fax>
 021/560994
 
-<E-mail>
+<Email>
 casaryiad@gmail.com
 
 
 
 <PROGRAM>
-<Z>Luni - Miercuri
-<O>11:30 - 21:30
-<Z>Joi - Duminică
-<O>11:30 - 23:30
-
-
-
+<Z>|Luni - Miercuri
+<O>|11:30 - 21:30
+<Z>|Joi - Duminică
+<O>|11:30 - 23:30

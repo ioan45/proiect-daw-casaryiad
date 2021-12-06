@@ -1,12 +1,12 @@
 @font-face
 {
-    font-family: Montez;
-    src: url("../other_resources/Montez.ttf");
+    font-family: "Montez";
+    src: url("/views/other_resources/Montez.ttf");
 }
 @font-face
 {
     font-family: "Revans Medium";
-    src: url("../other_resources/RevansMedium.otf");
+    src: url("/views/other_resources/RevansMedium.otf");
 }
 
 header

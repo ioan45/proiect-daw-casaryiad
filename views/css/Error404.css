@@ -1,0 +1,18 @@
+#text
+{
+    color: white;
+    font-family: "Comic Sans MS";
+    text-align: center;
+}
+#fundal
+{
+    filter: brightness(80%) !important;
+}
+#text h1
+{
+    font-weight: bold;
+    font-size: 100px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}

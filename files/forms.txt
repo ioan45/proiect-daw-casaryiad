@@ -30,3 +30,115 @@ Trimis la: 2021-11-14 08:59:15pm
  Observatii: e
 
 -----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-19 10:38:58pm
+
+ Nume: Ion
+ Prenume: Culea
+ E-mail: alfa@gmail.com
+ Telefon: 3432423432
+ Tip eveniment: Botez
+ Data evenimentului: 2021-11-20
+ Numar invitati: 2
+ Observatii: No idea!
+
+-----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-19 10:40:36pm
+
+ Nume: Ion
+ Prenume: Culea
+ E-mail: alfa@gmail.com
+ Telefon: 3432423432
+ Tip eveniment: Botez
+ Data evenimentului: 2021-11-20
+ Numar invitati: 2
+ Observatii: No idea!
+
+-----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-19 10:45:17pm
+
+ Nume: qwer
+ Prenume: qwer
+ E-mail: sdfsdfsdfd@gfhgf.com
+ Telefon: 1231312432
+ Tip eveniment: Botez
+ Data evenimentului: 2021-12-07
+ Numar invitati: 0
+ Observatii: sadas
+
+-----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-19 10:51:36pm
+
+ Nume: ETTrt
+ Prenume: ertetrertert
+ E-mail: alfa@gmail.com
+ Telefon: 3432423432
+ Tip eveniment: Nunta
+ Data evenimentului: 2021-12-08
+ Numar invitati: 0
+ Observatii: asdsadadsad{}{}{}
+
+-----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-19 10:55:55pm
+
+ Nume: Ion
+ Prenume: Culea
+ E-mail: asdasdasd@fff.ro
+ Telefon: 3432423432
+ Tip eveniment: Botez
+ Data evenimentului: 2021-12-09
+ Numar invitati: 1
+ Observatii: asdasd
+
+-----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-19 10:56:08pm
+
+ Nume: Ion
+ Prenume: Culea
+ E-mail: asdasdasd@fff.ro
+ Telefon: 3432423432
+ Tip eveniment: Botez
+ Data evenimentului: 2021-12-09
+ Numar invitati: 1
+ Observatii: asdasd
+
+-----------------------------------------
+
+
+-----------------------------------------
+
+Trimis la: 2021-11-19 10:57:33pm
+
+ Nume: rgdfgdfg
+ Prenume: Culea
+ E-mail: alfa@gmail.com
+ Telefon: 3432423432
+ Tip eveniment: Corporate
+ Data evenimentului: 2021-11-22
+ Numar invitati: 13
+ Observatii: jjjjjj
+
+-----------------------------------------

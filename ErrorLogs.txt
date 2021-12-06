@@ -1,0 +1,2 @@
+
+[DatabaseOps] [2021-12-05 11:19:43pm] Query esuat: Unknown column 'Array' in 'field list' .

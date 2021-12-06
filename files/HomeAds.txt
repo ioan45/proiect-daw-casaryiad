@@ -1,0 +1,25 @@
+<TITLU>
+	Un deceniu de activitate
+</TITLU>
+<CONTINUT>
+	<P>
+		În curând Casa Ryiad va împlini 10 ani de la prima sa farfurie servită și de la primul său eveniment
+		organizat cu succes. Prin urmare, în acea zi prețurile întregului meniu vor scădea cu pană la 50%.
+		De asemenea, se pregătește și un eveniment special ce sigur te va distra pe cinste.
+	</P>
+	<P> 
+		Te așteptăm!
+	</P>
+</CONTINUT>
+
+
+<TITLU>
+	Închis pentru renovare...
+</TITLU>
+<CONTINUT>
+	<P> 
+		Vă aducem la cunoștință o veste mai puțin bună pentru următoarea perioadă, dar semnificativ mai bună 
+		pentru viitor. Clădirea restaurantului va intra într-un proces de renovare menit să dea un nou stil 
+		ce va fi mult mai interesant. Evenimentele nu sunt afectate.
+	</P>
+</CONTINUT>

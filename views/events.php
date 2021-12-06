@@ -3,23 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css\bootstrap.min.css">
-        <link rel="stylesheet" href="css\common.css">
-        <link rel="stylesheet" href="css\events.css">
+        <link rel="stylesheet" href="/views/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/views/css/common.css">
+        <link rel="stylesheet" href="/views/css/events.css">
         <title>Evenimente | Casa Ryiad</title>
     </head>
     <body>
-        <img id="fundal" src="../images/events2.jpg" alt="main_img" class="position-fixed">
+        <img id="fundal" src="/images/events2.jpg" alt="main_img" class="position-fixed">
         
-        <?php include_once "common_parts/header_and_nav.html" ?>
+        <?php include_once "views/common_parts/header_and_nav.php" ?>
         
         <section class="container-sm">
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-6">
-                        <img src="../images/wedding.jpg" class="img-fluid rounded-start" alt="wedding.jpg">
+                    <div class="col-lg-6">
+                        <img src="/images/wedding.jpg" class="rounded" alt="wedding.jpg">
                     </div>
-                    <div class="col-md-6 text-center d-flex align-items-center">
+                    <div class="col-lg-6 text-center d-flex align-items-center">
                         <div class="card-body">
                             <h3 class="card-title fs-1">Nuntă</h3>
                             <p class="card-text font-sans-serif">
@@ -36,7 +36,7 @@
             </div>
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-6 text-center d-flex align-items-center">
+                    <div class="col-lg-6 text-center d-flex align-items-center">
                         <div class="card-body">
                             <h3 class="card-title fs-1">Botez</h3>
                             <p class="card-text font-sans-serif">
@@ -49,8 +49,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <img src="../images/christening.jpg" class="img-fluid rounded-end" alt="christening.jpg">
+                    <div class="col-lg-6">
+                        <img src="/images/christening.jpg" class="rounded" alt="christening.jpg">
                     </div>
                 </div>
             </div>
@@ -59,10 +59,10 @@
         <section class="container-sm">
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-6">
-                        <img src="../images/private.jpg" class="img-fluid rounded-start" alt="private.jpg">
+                    <div class="col-lg-6">
+                        <img src="/images/private.jpg" class="rounded" alt="private.jpg">
                     </div>
-                    <div class="col-md-6 text-center d-flex align-items-center">
+                    <div class="col-lg-6 text-center d-flex align-items-center">
                         <div class="card-body">
                             <h3 class="card-title fs-1">Petreceri private</h3>
                             <p class="card-text font-sans-serif">
@@ -80,7 +80,7 @@
             </div>
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-6 text-center d-flex align-items-center">
+                    <div class="col-lg-6 text-center d-flex align-items-center">
                         <div class="card-body">
                             <h3 class="card-title fs-1">Evenimente corporate</h3>
                             <p class="card-text font-sans-serif">
@@ -95,19 +95,19 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <img src="../images/corporate.jpg" class="img-fluid rounded-end" alt="corporate.jpg">
+                    <div class="col-lg-6">
+                        <img src="/images/corporate.jpg" class="rounded" alt="corporate.jpg">
                     </div>
                 </div>
             </div>
         </section>
 
         <div class="row justify-content-center">
-            <a id="buton_catre_form" class="btn btn-dark btn-lg col-11 col-sm-6" href="event_form.php" role="button">Fă o rezervare!</a>
+            <a id="buton_catre_form" class="btn btn-dark btn-lg col-11 col-sm-6" href="/rezervare" role="button">Fă o rezervare!</a>
         </div>
 
-        <?php include_once "common_parts/footer.php" ?>
+        <?php include_once "views/common_parts/footer.php" ?>
 
-        <script src="js\bootstrap.min.js"></script>
+        <script src="/views/js/bootstrap.min.js"></script>
     </body>
 </html>
