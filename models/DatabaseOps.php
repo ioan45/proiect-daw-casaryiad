@@ -22,6 +22,8 @@ class DatabaseOps
         $this->db_connection = new mysqli($this->db_server, $this->db_username, $this->db_password, $this->db_name);
         if ($this->db_connection->connect_errno)
             $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Conexiune esuata: ' . $this->db_connection->connect_error);
+        else
+            $this->db_connection->set_charset("utf8");
     }
 
     public function __destruct()
