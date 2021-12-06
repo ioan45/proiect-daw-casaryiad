@@ -30,7 +30,7 @@ class DatabaseOps
             $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Conexiunea nu a putut fi inchisa: ' . $this->db_connection->error);
     }
 
-    public function query(string $query) : array|bool
+    public function query(string $query)
     {
         if (!$this->ping())
             return false;
