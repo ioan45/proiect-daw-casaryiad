@@ -58,7 +58,8 @@
                 Mai multe solicitari pot fi facute pentru aceeasi data, totusi doar una va fi definitiva, celelalte vor fi invalidate. 
                 Reprezentantii restaurantului vor contacta clientul pentru a cere confirmarea evenimentului (in caz afirmativ, atributul 'stare' devine CONFIRMATA) 
                 sau pentru a-i da un raspuns negativ cu privire la solicitare. (atributul 'stare' devine DATA_OCUPATA). Clientii au si posibilitatea de a anula
-                evenimentul stabilit (atributul 'stare' devine ANULATA).
+                evenimentul stabilit (atributul 'stare' devine ANULATA). Odata ce un eveniment a fost confirmat pentru o anumita data, formularele ulterioare, 
+                pentru acea data, vor fi respinse.
             </p>
             <p class="fs-5">
                 &emsp;Aplicatia web este planificata astfel incat informatiile legate de anunturi, datele de contact si programul de lucru sunt preluate 
