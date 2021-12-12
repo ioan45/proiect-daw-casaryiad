@@ -7,8 +7,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/views/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/views/css/common.css">
-        <link rel="stylesheet" href="/views/css/event_form.css">
+        <link rel="stylesheet" href="/views/css/Common.css">
+        <link rel="stylesheet" href="/views/css/EventForm.css">
         <title>Fă o rezervare! | Casa Ryiad</title>
     </head>
     <body>

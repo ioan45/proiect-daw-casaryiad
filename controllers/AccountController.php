@@ -24,21 +24,21 @@ class AccountController extends Controller
     {
         if (session_status() != PHP_SESSION_ACTIVE)  // sesiune inactiva/dezactivata
         {
-            // aici, ar fi mai ok o pagina de eroare 
-            header('Location: /autentificare', true, 301);
-            die();
+            $title = 'Autentificare eșuată';
+            $body = 'Ne pare rău, autentificarea nu a putut fi efectuată cu succes. Încearcă mai târziu.';
+            $this->MessagePage($title, $title, $body);
         }
         else if (isset($_SESSION['UtilizatorID']))  // sesiune activa si utilizator autentificat
         {
             header('Location: /', true, 301);
             die();
         }
-        else if (!isset($_POST['Utilizator']) || !isset($_POST['Parola']))  // sesiune activa si utilizator neidentificat, dar fara formular
+        else if (!isset($_POST['Utilizator']) || !isset($_POST['Parola']))  // sesiune activa si utilizator neautentificat, dar fara formular
         {
             header('Location: /autentificare', true, 301);
             die();
         }
-        else  // sesiune activa, utilizator neidentificat si formular trimis
+        else  // sesiune activa, utilizator neautentificat si formular trimis
         {
             $db = new DatabaseOps();
 
@@ -48,9 +48,11 @@ class AccountController extends Controller
             $exist = $db->query("SELECT cod_utilizator, tip FROM utilizator WHERE id='$id' AND parola='$password'");
             if (empty($exist))
             {
-                $FailedMsg = "Datele introduse sunt incorecte.";
-                require_once "views/LoginFailed.php";
                 unset($db);
+
+                $title = 'Autentificare eșuată';
+                $body = 'Datele introduse sunt incorecte.';
+                $this->MessagePage($title, $title, $body);
             }
             else
             {
@@ -92,9 +94,9 @@ class AccountController extends Controller
     {
         if (session_status() != PHP_SESSION_ACTIVE)  // sesiune inactiva/dezactivata
         {
-            // aici, ar fi mai ok o pagina de eroare 
-            header('Location: /inregistrare', true, 301);
-            die();
+            $title = 'Înregistrare eșuată';
+            $body = 'Ne pare rău, înregistrarea nu a putut fi efectuată cu succes. Încearcă mai târziu.';
+            $this->MessagePage($title, $title, $body);
         }
         else if (isset($_SESSION['UtilizatorID']))  // sesiune activa si utilizator autentificat
         {
@@ -102,7 +104,7 @@ class AccountController extends Controller
             die();
         }
         else if (!isset($_POST['Utilizator']) || !isset($_POST['Parola']) || !isset($_POST['Nume']) || !isset($_POST['Prenume'])
-                 || !isset($_POST['Email']) || !isset($_POST['Telefon']))
+                 || !isset($_POST['Email']) || !isset($_POST['Telefon']))  // Formular incorect
         {
             header('Location: /inregistrare', true, 301);
             die();   
@@ -121,9 +123,11 @@ class AccountController extends Controller
             $exist = $db->query("SELECT 1 FROM utilizator WHERE id='$fieldID'");
             if (!empty($exist))
             {
-                $FailedMsg = "Exista deja un cont cu acest nume de utilizator";
-                require_once "views/RegistrationFailed.php";
                 unset($db);
+
+                $title = 'Înregistrare eșuată';
+                $body = 'Exista deja un cont cu acest nume de utilizator.';
+                $this->MessagePage($title, $title, $body);
             }
             else
             {
@@ -140,13 +144,18 @@ class AccountController extends Controller
                             $userID = $userID[0]['cod_utilizator'];
                             $db->query("INSERT INTO activitate values (NULL, $userID, 'CONT_CREAT', default)");
 
-                            require_once "views/RegistrationOK.php";
+                            $title = 'Înregistrare reușită';
+                            $head = 'Înregistrarea a fost efectuată cu succes! :)';
+                            $body = 'De acum, poți profita la maxim de serviciile noastre.';
+                            $this->MessagePage($title, $head, $body);
+
                             return;
                         }
                     }
                 }
-                $FailedMsg = 'Ne pare rău, înregistrarea nu a reușit. Încearcă mai târziu.';
-                require_once "views/RegistrationFailed.php";
+                $title = 'Înregistrare eșuată';
+                $body = 'Ne pare rău, înregistrarea nu a putut fi efectuată cu succes. Încearcă mai târziu.';
+                $this->MessagePage($title, $title, $body);
             }
         }
     }
