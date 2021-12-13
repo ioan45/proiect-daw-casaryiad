@@ -70,13 +70,12 @@ class EventReservController extends Controller
                         return;
                     }
                 }
+                $title = 'Formular Netrimis!';
+                $head = 'Trimitere eșuată :(';
+                $body = 'Ne pare rău, a intervenit o problemă in transmiterea formularului. Incercați mai târziu.';
+                $this->MessagePage($title, $head, $body);
             }
             unset($db);
-
-            $title = 'Formular Netrimis!';
-            $head = 'Trimitere eșuată :(';
-            $body = 'Ne pare rău, a intervenit o problemă in transmiterea formularului. Incercați mai târziu.';
-            $this->MessagePage($title, $head, $body);
         }
     }
 }
