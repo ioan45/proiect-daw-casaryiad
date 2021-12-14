@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-<!-- Trebuie dus in controller --  include_once "../models/event_form_processing.php"  -- Trebuie dus in controller -->
-
 <html lang="ro">
     <head>
         <meta charset="utf-8">
@@ -42,9 +40,13 @@
                     <textarea class="form-control" id="observatii" rows="3" placeholder="Informații suplimentare ..." name="Obs"></textarea>
                 </div>
             </div>
+
+            <input type="text" id="FormularSID" name="FormularSID" value="<?=$formSID?>">
+            
             <div class="row justify-content-center">
                     <button type="submit" class="btn col-sm-6" name="Submit">Trimite!</button>
             </div>
+            
             <p>
                 <span>Notă:</span><br>
                 - Rezervările sunt valide numai în urma unei confirmări prin e-mail sau telefonice din partea Casa Ryiad.<br>

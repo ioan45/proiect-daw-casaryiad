@@ -37,6 +37,10 @@ form
 {
     color: black;
 }
+#FormularSID
+{
+    display: none;
+}
 .btn
 {
     background-color: #2F2F2F;

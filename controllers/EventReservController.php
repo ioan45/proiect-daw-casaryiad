@@ -8,16 +8,21 @@ class EventReservController extends Controller
 {
     public function index() : void  // pagina formularului
     {
+        // Se creeaza o 'sesiune' a formularului (se seteaza $_SESSION['FormularSID'] cu $formSID) 
+        // ce îi va corespunde formularul din pagina incarcata (formularul are un camp invizibil in care retine $formSID)
+        $formSID = random_int(PHP_INT_MIN, PHP_INT_MAX);
+        if (session_status() == PHP_SESSION_ACTIVE)
+            $_SESSION['FormularSID'] = $formSID;
+
         // Incarca datele de contact/program afisate la finalul paginii
         extract(ContactProgramDetails::Get());
-        
+
         require_once "views/EventForm.php";
     }
 
     public function FormSent() : void
     {
-        // Daca exista cel mult campul specific butonului Submit
-        if (count($_POST) <= 1)
+        if (empty($_POST['Tip_event']) || empty($_POST['Data']))  // Lipsesc campuri obligatorii din formular
         {
             $title = 'Formular Netrimis!';
             $head = 'Trimitere eșuată :(';
@@ -33,6 +38,19 @@ class EventReservController extends Controller
         }
         else  // sesiune activa + utilizator autentificat
         {
+            // Verificare retrimitere formular
+            //  -- Daca sesiunea formularului este creata (exista $_SESSION['FormularSID'])
+            //     si daca formularul transmis corespunde acesteia atunci se trece la procesarea formularului
+            if (!isset($_POST['FormularSID']) || !isset($_SESSION['FormularSID']) || $_POST['FormularSID'] != $_SESSION['FormularSID'])
+            {
+                $title = 'Formular respins';
+                $head = 'Trimitere eșuată';
+                $body = 'Formularul dvs. a fost respins. <br>' .
+                        '(O posibilă cauză ar putea fi încercarea de a retrimite un formular ce a fost deja transmis)';
+                $this->MessagePage($title, $head, $body);
+                return;
+            }
+
             $db = new DatabaseOps();
             
             $fieldEventType = $db->EscapeString($_POST['Tip_event']);
@@ -56,10 +74,14 @@ class EventReservController extends Controller
                 if (!empty($queryResult))
                 {
                     $clientCode = $queryResult[0]['cod_client'];
-                    $query = "INSERT INTO rezervare values (NULL, $clientCode, 'ASTEPTARE', default, '$fieldEventType', $fieldDate, $fieldNrGuests, '$fieldObs')";
+                    $fieldNrGuests = empty($fieldNrGuests) ? 'null' : $fieldNrGuests;
+                    $fieldObs = empty($fieldObs) ? 'null' : ("'" . $fieldObs . "'");  // ghilimele adaugate aici deoarece campul poate fi nul 
+                                                                                      // (se evita inserarea sirului 'null' in loc de valoarea null)
+                    $query = "INSERT INTO rezervare values (NULL, $clientCode, 'ASTEPTARE', default, '$fieldEventType', $fieldDate, $fieldNrGuests, $fieldObs)";
                     if ($db->query($query))
                     {
                         unset($db);
+                        unset($_SESSION['FormularSID']);  // dupa transmitere cu succes, sesiunea formularului se incheie
 
                         $title = 'Formular Trimis!';
                         $head = 'Trimitere reușită :)';
