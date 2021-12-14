@@ -23,6 +23,16 @@ form
 
     color: #CED4DA;
 }
+#DateIncorecte
+{
+    color: red;
+    font-weight: 700;
+    text-align: center;
+    border: 1px solid darkred;
+    background-color: rgba(0,0,0,0.30) !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 .form-control
 {
     background-color: rgba(0,0,0,0.10) !important;

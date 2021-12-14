@@ -19,6 +19,13 @@
         <h2 id="antet_form" class="font-sans-serif">AUTENTIFICARE</h2>
 
         <form class="font-sans-serif" action="/autentificare/procesare" method="POST">
+            <?php
+                if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['AutEsuata']))
+                {
+                    echo '<div class="col my-4" id="DateIncorecte">Date incorecte</div>';
+                    unset($_SESSION['AutEsuata']);
+                }
+            ?>
             <div class="col my-2">
                 <label for="Utilizator" class="form-label">Utilizator</label>
                 <input type="text" class="form-control" id="Utilizator" maxlength="16" name="Utilizator" required>

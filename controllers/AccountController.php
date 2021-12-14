@@ -48,11 +48,10 @@ class AccountController extends Controller
             $exist = $db->query("SELECT cod_utilizator, tip FROM utilizator WHERE id='$id' AND parola='$password'");
             if (empty($exist))
             {
-                unset($db);
-
-                $title = 'Autentificare eșuată';
-                $body = 'Datele introduse sunt incorecte.';
-                $this->MessagePage($title, $title, $body);
+                // Date incorecte
+                $_SESSION['AutEsuata'] = true;
+                header('Location: /autentificare', true, 301);
+                die();
             }
             else
             {
