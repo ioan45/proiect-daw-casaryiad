@@ -8,22 +8,65 @@ section
     padding-top: 80px;
     filter: drop-shadow(0px 0px 10px black);
 }
-section img
+.evenimente img
 {
     height: 100%;
     width: 100%;
 }
-.card
+.evenimente .card
 {
     border: none;
 }
-.card-title
+.evenimente .card-title
 {
     font-family: "Montez";
     margin-bottom: 5%;
 }
-#buton_catre_form
+.white_bg
 {
+    background-color: white;
+    width: 100%;
+    margin-top: 120px;
+    padding-top: 40px !important;
+    padding-bottom: 80px;
+}
+.saloane h1, .meniuri h1
+{
+    font-family: "Revans Medium";
+    color: #E5C40E;
+}
+.saloane .card
+{
+    width: 18rem;
+    filter: drop-shadow(0px 0px 3px black);
+    border: none;
     margin-top: 80px;
-    border: 1px solid white;
+}
+.saloane .card-img-top, .meniuri .card-img-top
+{
+    height: auto !important;
+}
+.saloane .card-title
+{
+    font-family: "Montez";
+    color: black;
+}
+.meniuri .card
+{
+    width: 15rem;
+    border: 2px solid #E5C40E;
+    border-bottom: none; 
+    border-top: none; 
+    margin-top: 80px;
+}
+.list-group-item
+{
+    font-family: "Montez" !important;
+    color: black !important;
+    border: none;
+    border-bottom: 3.5px solid #E5C40E;
+}
+footer
+{
+    margin-top: 120px !important;
 }

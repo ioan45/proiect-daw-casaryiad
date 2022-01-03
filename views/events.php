@@ -13,7 +13,7 @@
         
         <?php include_once "views/common_parts/header_and_nav.php" ?>
         
-        <section class="container-sm">
+        <section class="container-sm evenimente">
             <div class="card">
                 <div class="row g-0">
                     <div class="col-lg-6">
@@ -56,7 +56,7 @@
             </div>
         </section>
 
-        <section class="container-sm">
+        <section class="container-sm evenimente">
             <div class="card">
                 <div class="row g-0">
                     <div class="col-lg-6">
@@ -102,9 +102,80 @@
             </div>
         </section>
 
-        <div class="row justify-content-center">
-            <a id="buton_catre_form" class="btn btn-dark btn-lg col-11 col-sm-6" href="/rezervare" role="button">Fă o rezervare!</a>
-        </div>
+        <section class="white_bg saloane text-center">
+            <h1>SALOANE</h1>
+            <div class="container-sm d-flex flex-wrap justify-content-around">
+                <div class="card">
+                    <img src="/images/manhattan.jpg" class="card-img-top" alt="salon_manhattan">
+                    <div class="card-body">
+                        <h1 class="card-title">Manhattan</h1>
+                        <p class="card-text">
+                            În salonul Manhattan, privirile vă vor fi captate de mobilierul ce reunește un mix de stiluri.
+                        </p>
+                        <p>Capacitate: 180 persoane</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/images/route66.jpg" class="card-img-top" alt="salon_route66">
+                    <div class="card-body">
+                        <h1 class="card-title">Route Sixty Six</h1>
+                        <p class="card-text">
+                            Designeri renumiți din întreaga lume s-au întrecut pe ei înșiși în conceperea salonului Route Sixty Six.
+                            Pereții lambrisați cu lemn masiv oferă un aer elegant evenimentului.
+                        </p>
+                        <p>Capacitate: 600 persoane</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/images/broadway.jpg" class="card-img-top" alt="salon_broadway">
+                    <div class="card-body">
+                        <h1 class="card-title">Broadway</h1>
+                        <p class="card-text">
+                            Salonul Broadway are un design modern, cu elemente de decor simple și minimaliste fiind alegerea 
+                            potrivită pentru organizarea unei cine de afaceri cu colaboratorii.
+                        </p>
+                        <p>Capacitate: 120 persoane</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/images/oasis.jpg" class="card-img-top" alt="salon_oasis">
+                    <div class="card-body">
+                        <h1 class="card-title">Oasis</h1>
+                        <p class="card-text">
+                            Salonul Oasis își propune să vă ofere pentru ocaziile pe care vi le propuneți aceeași atmosferă glamour a capitalei Angliei.
+                        </p>
+                        <p>Capacitate: 250 persoane</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="white_bg meniuri text-center">
+            <h1>MENIURI</h1>
+            <div class="d-flex flex-wrap justify-content-center">
+                <?php
+                    foreach ($menus as $idx => $menuInfo)
+                    {
+                        $menuName = $menuInfo['denumire'];
+                        $menuPrice = $menuInfo['pret'];
+                        echo '<div class="card rounded-0">';
+                            echo "<h1 class=\"list-group-item\">$menuName</h1>";
+                            echo '<div class="card-body">';
+                                echo '<p class="card-text text-start">';
+                                    foreach ($menusElems as $idx => $elems)
+                                        if ($elems['den_meniu'] == $menuName)
+                                        {
+                                            $elemName = $elems['den_elem'];
+                                            echo "- $elemName<br>";
+                                        }
+                                echo '</p>';
+                                echo "<p>Preț: $menuPrice lei / pers.</p>";
+                            echo '</div>';
+                        echo '</div>';
+                    }
+                ?>
+            </div>
+        </section>
 
         <?php include_once "views/common_parts/footer.php" ?>
 

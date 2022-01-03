@@ -2,27 +2,36 @@
 
 class HomeAds
 {
+    private string $filePath = 'files/HomeAds.txt';
+    private bool $fileLoaded = false;
+    private bool $fileUpToDate = true;
+
     private array $adsTitles = array();  // [titlu]
-    private array $adsParagraphs = array();  // [index_titlu => [paragraf_continut]]
-    
-    public function ParseAdsFile(string $filePath) : void
+    private array $adsContents = array();  // [continut]
+
+
+    public function LoadAdsFile() : void
     {
-        $file = fopen($filePath, 'r');
+        if ($this->fileLoaded)
+            return;
+
+        $file = fopen($this->filePath, 'r');
 
         $line = "";
         while (!feof($file))  // cat timp exista anunturi
         {
             $title = "";
-            $paragraphs = array();
+            $content = "";
 
             // Titlu
             while (!feof($file) && $line != "<TITLU>")  // cat timp nu am ajuns la un anunt (intai apare titlul)
                 $line = trim(fgets($file));
-            while (!feof($file) && $line != "</TITLU>")
+            while (!feof($file))
             {
-                $line = trim(fgets($file));
-                if ($line != "</TITLE>")
-                    $title = $title . $line . " ";
+                $line = fgets($file);  // nu se face trim() aici, se pastreaza formatul textului
+                if (trim($line) == "</TITLU>")
+                    break;
+                $title .= htmlspecialchars($line);
             }
 
             // Continut
@@ -30,32 +39,75 @@ class HomeAds
                 $line = trim(fgets($file));
             while (!feof($file))
             {
-                while(!feof($file) && $line != "<P>" && $line != '</CONTINUT>')
-                    $line = trim(fgets($file));
-                if ($line == '</CONTINUT>')
+                $line = fgets($file);  // nu se face trim() aici, se pastreaza formatul textului
+                if (trim($line) == '</CONTINUT>')
                     break;
-    
-                // Paragraf din continut
-                $p = "";
-                while(!feof($file) && $line != "</P>")
-                {
-                    $line = trim(fgets($file));
-                    if ($line != "</P>")
-                        $p = $p . $line . " ";
-                }
-            
-                if ($p != "")
-                    $paragraphs[] = $p;
+                $line = htmlspecialchars($line);
+                $line = str_replace('&lt;p&gt;', '<p>', $line);
+                $line = str_replace('&lt;/p&gt;', '</p>', $line);
+                $content .= $line;
             }
             
-            if ($title != "" && !empty($paragraphs))
+            if (!empty($title) && !empty($content))
             {
                 $this->adsTitles[] = $title;
-                $this->adsParagraphs[] = $paragraphs;
+                $this->adsContents[] = $content;
             }
         }
-
+        $this->fileLoaded = true;
+        $this->fileUpToDate = true;
+        
         fclose($file);
+    }
+
+    public function NewAd(string $title, string $content) : bool
+    {
+        if (!$this->fileLoaded)
+            $this->LoadAdsFile();
+
+        if (substr($title, -1) !== "\n")
+            $title .= "\n";
+        if (substr($content, -1) !== "\n")
+            $content .= "\n";
+
+        $this->adsTitles[] = $title;
+        $this->adsContents[] = $content;
+        $this->fileUpToDate = false;
+        return true;
+    }
+
+    public function ModifyAd(int $id, string $newTitle, string $newContent) : bool
+    {
+        /// $id - pozitia anuntului in fisierul text
+
+        if (!$this->fileLoaded)
+            $this->LoadAdsFile();
+
+        if (!isset($this->adsTitles[$id]) || !isset($this->adsContents[$id]))
+            return false;
+
+        $this->adsTitles[$id] = $newTitle;
+        $this->adsContents[$id] = $newContent;
+        $this->fileUpToDate = false;
+        return true;
+    }
+
+    public function DeleteAd(int $id) : bool
+    {
+        /// $id - pozitia anuntului in fisierul text
+
+        if (!$this->fileLoaded)
+            $this->LoadAdsFile();
+
+        if (!isset($this->adsTitles[$id]) || !isset($this->adsContents[$id]))
+            return false;
+        
+        unset($this->adsTitles[$id]);
+        $this->adsTitles = array_values($this->adsTitles);
+        unset($this->adsContents[$id]);
+        $this->adsContents = array_values($this->adsContents);
+        $this->fileUpToDate = false;
+        return true;
     }
 
     public function GetTitles() : array
@@ -63,9 +115,31 @@ class HomeAds
         return $this->adsTitles;
     }
 
-    public function GetParagraphs() : array
+    public function GetContents() : array
     {
-        return $this->adsParagraphs;
+        return $this->adsContents;
+    }
+
+    public function WriteCurrentAdsInFile() : void
+    {
+        if ($this->fileUpToDate)
+            return;
+
+        $file = fopen($this->filePath, 'w');
+        for ($i = 0; $i < count($this->adsTitles); ++$i)
+        {
+            $title = htmlspecialchars_decode($this->adsTitles[$i]);
+            $content = htmlspecialchars_decode($this->adsContents[$i]);
+            if (substr($title, -1) !== "\n")
+                $title .= "\n";
+            if (substr($content, -1) !== "\n")
+                $content .= "\n";
+
+            $ad = "\n<TITLU>\n" . $title . "</TITLU>";
+            $ad .= "\n<CONTINUT>\n" . $content . "</CONTINUT>\n";
+            fwrite($file, $ad);
+        }
+        fclose($file);
     }
 }
 

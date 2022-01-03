@@ -1,3 +1,8 @@
+nav #autentificare
+{
+   background-color: #D8D8D8 !important;
+   color: #000000 !important;
+}
 #fundal
 {
     filter: brightness(60%);
@@ -11,7 +16,7 @@
 }
 form
 {
-    width: 300px;
+    width: 400px;
     max-width: 100%;
     margin-top: 80px;
     margin-left: auto;
@@ -22,16 +27,6 @@ form
     backdrop-filter: blur(7px);
 
     color: #CED4DA;
-}
-#DateIncorecte
-{
-    color: red;
-    font-weight: 700;
-    text-align: center;
-    border: 1px solid darkred;
-    background-color: rgba(0,0,0,0.30) !important;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 .form-control
 {
@@ -48,6 +43,8 @@ form
     background-color: #2F2F2F;
     color: #CED4DA;
     border: 1px solid #CED4DA;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 .btn:hover
 {

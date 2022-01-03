@@ -10,30 +10,25 @@ class PresentationController extends Controller
     public function index() : void  // pagina acasa 
     {
         $getAdsModel = new HomeAds;
-        $getAdsModel->ParseAdsFile('files/HomeAds.txt');
+        $getAdsModel->LoadAdsFile();
         $titles = $getAdsModel->GetTitles();
-        $paragraphs = $getAdsModel->GetParagraphs();
+        $contents = $getAdsModel->GetContents();
 
         // Incarca datele de contact/program afisate la finalul paginii
         extract(ContactProgramDetails::Get());
 
         require_once "views/Home.php";
     }
-
-    public function menu() : void
-    {
-        $db = new DatabaseOps();
-        $foodRows = $db->query("SELECT denumire, pret, cantitate, unit_masura FROM element_meniu WHERE upper(tip) = 'M'");
-        $alcRows = $db->query("SELECT denumire, pret, cantitate, unit_masura FROM element_meniu WHERE upper(tip) = 'BA'");
-        $nonAlcRows = $db->query("SELECT denumire, pret, cantitate, unit_masura FROM element_meniu WHERE upper(tip) = 'BNA'");
-        unset($db);
-
-        extract(ContactProgramDetails::Get());
-        require_once "views/Menu.php";
-    }
-
+    
     public function events() : void
     {
+        $db = new DatabaseOps('PresentCtrl');
+        $menus = $db->query("SELECT denumire, pret FROM meniu");
+        $menusElems = $db->query("SELECT m.denumire as 'den_meniu', em.denumire as 'den_elem' " .
+                                 "FROM meniu m, element_meniu em, compozitie_meniu cm " .
+                                 "WHERE m.cod_meniu = cm.cod_meniu and cm.cod_element = em.cod_element");
+        unset($db);
+
         extract(ContactProgramDetails::Get());
         require_once "views/Events.php";
     }

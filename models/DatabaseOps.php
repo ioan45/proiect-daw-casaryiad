@@ -10,12 +10,15 @@ class DatabaseOps
     private string $db_name;
 
     private $db_connection;
+    private $queryErrorMsg;
     private $errCollector;
+    private string $errorLogContext;
 
 
-    public function __construct()
+    public function __construct(string $errorLogContext)
     {
-        $this->errCollector = new ErrorCollector('DatabaseOps');
+        $this->errorLogContext = $errorLogContext . '->' . 'DatabaseOps';
+        $this->errCollector = new ErrorCollector($this->errorLogContext);
 
         $this->parseConfigFile('files/DBConnectInfo.cfg');
         
@@ -24,6 +27,8 @@ class DatabaseOps
             $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Conexiune esuata: ' . $this->db_connection->connect_error);
         else
             $this->db_connection->set_charset("utf8");
+        $this->queryErrorMsg = '';
+
     }
 
     public function __destruct()
@@ -42,8 +47,11 @@ class DatabaseOps
         if (gettype($queryResult) == 'object')
             return $queryResult->fetch_all(MYSQLI_ASSOC);
 
-        if (!$queryResult)
+        if ($queryResult === false)
+        {
             $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Query esuat: ' . $this->db_connection->error);
+            $this->queryErrorMsg = $this->db_connection->error;
+        }
 
         return $queryResult;
     }
@@ -75,10 +83,9 @@ class DatabaseOps
         return false; 
     }
 
-    public function EscapeString(string $str)
-    {
-        return $this->db_connection->escape_string($str);
-    }
+    public function EscapeString(string $str) : string { return $this->db_connection->escape_string($str); }
+
+    public function GetQueryErrorMsg() : string { return $this->queryErrorMsg; }
 
     private function parseConfigFile(string $configFile) : void
     {

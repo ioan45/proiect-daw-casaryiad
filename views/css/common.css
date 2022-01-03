@@ -49,6 +49,24 @@ body
     z-index: -30;
     filter: brightness(50%);
 }
+.mesaj-eroare
+{
+    color: red;
+    font-weight: 700;
+    text-align: center;
+    border: 1px solid darkred;
+    background-color: rgba(0,0,0,0.30) !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.g-recaptcha
+{
+    display: inline-block;
+}
+.lipsaCAPTCHA
+{
+    border: 5px solid red;
+}
 footer
 {
     margin-top: 80px;

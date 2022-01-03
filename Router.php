@@ -43,6 +43,7 @@ class Router
    public function ProcessURL(string $urlPath) : void
    {  
       $urlPath = trim($urlPath, '/');
+      $urlPath = explode('?', $urlPath)[0];
 
       if (isset($this->routes[$urlPath]))
       {

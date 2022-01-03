@@ -1,2 +1,26 @@
 
 [DatabaseOps] [2021-12-05 11:19:43pm] Query esuat: Unknown column 'Array' in 'field list' .
+[DatabaseOps] [2021-12-14 04:50:43pm] Query esuat: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\'sdf\')' at line 1 .
+[DatabaseOps] [2022-01-01 03:13:35am] Query esuat: Unknown column 'Oasis' in 'where clause' .
+[DatabaseOps] [2022-01-01 03:16:15am] Query esuat: Column count doesn't match value count at row 1 .
+[AccountCtrl->reCAPTCHA] [2022-01-01 11:24:57pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AccountCtrl->reCAPTCHA] [2022-01-01 11:25:17pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AccountCtrl->reCAPTCHA] [2022-01-01 11:25:33pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AccountCtrl->reCAPTCHA] [2022-01-01 11:28:40pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AccountCtrl->reCAPTCHA] [2022-01-01 11:28:50pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AccountCtrl->reCAPTCHA] [2022-01-02 01:31:59am] Eroare verificare google.com. Cod: 0; Descriere: timeout-or-duplicate .
+[AccountCtrl->AccountProces->reCAPTCHA] [2022-01-02 02:12:32am] Eroare verificare google.com. Cod: 0; Descriere: timeout-or-duplicate .
+[EventRsvCtrl->RsvFormProces->DatabaseOps] [2022-01-02 07:28:34am] Query esuat: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 .
+[EventRsvCtrl->RsvFormProces->DatabaseOps] [2022-01-02 07:34:06am] Query esuat: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 .
+[EventRsvCtrl->RsvFormProces->reCAPTCHA] [2022-01-02 07:37:30am] Eroare verificare google.com. Cod: 0; Descriere: timeout-or-duplicate .
+[AccountCtrl->AccountProces->reCAPTCHA] [2022-01-02 03:00:42pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AccountCtrl->AccountProces->reCAPTCHA] [2022-01-02 03:43:47pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AccountCtrl->AccountProces->reCAPTCHA] [2022-01-02 08:37:47pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[DADADAD->DatabaseOps] [2022-01-03 12:31:13am] Query esuat: CREATE command denied to user 'webapp_casaryiad'@'localhost' for table 'testtesttest' .
+[DADADAD->DatabaseOps] [2022-01-03 12:34:16am] Query esuat: CREATE command denied to user 'webapp_casaryiad'@'localhost' for table 'testtesttest' .
+[AdminCtrl->AdminOps->InputSQL->DatabaseOps] [2022-01-03 02:15:01am] Query esuat: CREATE command denied to user 'webapp_casaryiad'@'localhost' for table 'tytytyty' .
+[AdminCtrl->AdminOps->InputSQL->DatabaseOps] [2022-01-03 02:15:54am] Query esuat: CREATE command denied to user 'webapp_casaryiad'@'localhost' for table 'tytytyty' .
+[AdminCtrl->AdminPanelProc->InputSQL->DatabaseOps] [2022-01-03 03:01:51am] Query esuat: Table 'daw_proiect_casaryiad.employees' doesn't exist .
+[AccountCtrl->AccountProces->reCAPTCHA] [2022-01-03 08:34:08am] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .
+[AdminCtrl->AdminPanelProc->InputSQL->DatabaseOps] [2022-01-03 05:52:12pm] Query esuat: Table 'daw_proiect_casaryiad.employees' doesn't exist .
+[EventRsvCtrl->RsvFormProces->reCAPTCHA] [2022-01-03 07:24:18pm] Eroare verificare google.com. Cod: 0; Descriere: invalid-input-response .

@@ -19,28 +19,31 @@
         <h2 id="antet_form" class="font-sans-serif">AUTENTIFICARE</h2>
 
         <form class="font-sans-serif" action="/autentificare/procesare" method="POST">
-            <?php
-                if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['AutEsuata']))
-                {
-                    echo '<div class="col my-4" id="DateIncorecte">Date incorecte</div>';
-                    unset($_SESSION['AutEsuata']);
-                }
-            ?>
-            <div class="col my-2">
+            <?=$message?>
+
+            <div class="col pb-3">
                 <label for="Utilizator" class="form-label">Utilizator</label>
                 <input type="text" class="form-control" id="Utilizator" maxlength="16" name="Utilizator" required>
             </div>
-            <div class="col my-3">
+            <div class="col pb-3">
                 <label for="Parola" class="form-label">Parola</label>
                 <input type="password" class="form-control" id="Parola" maxlength="25" name="Parola" required>
             </div>
+
+            <div class="text-center">
+                <div class="g-recaptcha <?=$NoCAPTCHA?>" data-sitekey="<?=$siteKey?>"></div>
+            </div>
+
+            <input type="hidden" name="tokenFormular" value="<?=$formToken?>">
+
             <div class="row justify-content-center">
-                <button type="submit" class="btn col-6 mt-3" name="Submit">Autentifică-te!</button>
+                <button type="submit" class="btn col-sm-6" name="Submit">Autentifică-te!</button>
             </div>
         </form>
 
         <?php include_once "views/common_parts/footer.php" ?>
 
         <script src="/views/js/bootstrap.min.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </body>
 </html>

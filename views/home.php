@@ -30,14 +30,13 @@
                     <div class="carousel-item" data-bs-interval="10000">
                         <div id="aniversare" class="carousel-caption">
                             <h1> <?= $titles[0] ?> </h1>
-                            <p> <?= $paragraphs[0][0] ?> </p>
-                            <p> <?= $paragraphs[0][1] ?> </p>
+                            <?= $contents[0] ?>
                         </div>
                     </div>
                     <div class="carousel-item" data-bs-interval="10000">
                         <div id="renovare" class="carousel-caption">
                             <h1> <?= $titles[1] ?> </h1>
-                            <p> <?= $paragraphs[1][0] ?> </p>
+                            <?= $contents[1] ?>
                         </div>
                     </div>
                 </div>
