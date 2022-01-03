@@ -169,7 +169,7 @@ class ReservFormProcessing
 
     private function ValidCAPTCHA() : bool
     {
-        if (!isset($_POST['g-recaptcha-response']))
+        if (empty($_POST['g-recaptcha-response']))
             return false;
 
         $recaptchaModel = new reCAPTCHA($this->errorLogContext);
