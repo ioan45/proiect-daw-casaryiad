@@ -17,8 +17,7 @@
             <div id="news" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#news" data-bs-slide-to="0" class="active" aria-current="true"></button>
-                    <button type="button" data-bs-target="#news" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#news" data-bs-slide-to="2"></button>
+                    <?=$buttons?>
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="10000">
@@ -27,18 +26,7 @@
                             <span id="nume_rest">CASA RYIAD</span>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="10000">
-                        <div id="aniversare" class="carousel-caption">
-                            <h1> <?= $titles[0] ?> </h1>
-                            <?= $contents[0] ?>
-                        </div>
-                    </div>
-                    <div class="carousel-item" data-bs-interval="10000">
-                        <div id="renovare" class="carousel-caption">
-                            <h1> <?= $titles[1] ?> </h1>
-                            <?= $contents[1] ?>
-                        </div>
-                    </div>
+                    <?=$ads?>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#news" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

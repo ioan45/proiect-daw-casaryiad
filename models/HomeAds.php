@@ -65,10 +65,8 @@ class HomeAds
         if (!$this->fileLoaded)
             $this->LoadAdsFile();
 
-        if (substr($title, -1) !== "\n")
-            $title .= "\n";
-        if (substr($content, -1) !== "\n")
-            $content .= "\n";
+        $title = str_replace(array('<TITLU>', '</TITLU>', '<CONTINUT>', '</CONTINUT>'), '', $title);
+        $content = str_replace(array('<TITLU>', '</TITLU>', '<CONTINUT>', '</CONTINUT>'), '', $content);
 
         $this->adsTitles[] = $title;
         $this->adsContents[] = $content;
@@ -85,6 +83,9 @@ class HomeAds
 
         if (!isset($this->adsTitles[$id]) || !isset($this->adsContents[$id]))
             return false;
+
+        $newTitle = str_replace(array('<TITLU>', '</TITLU>', '<CONTINUT>', '</CONTINUT>'), '', $newTitle);
+        $newContent = str_replace(array('<TITLU>', '</TITLU>', '<CONTINUT>', '</CONTINUT>'), '', $newContent);
 
         $this->adsTitles[$id] = $newTitle;
         $this->adsContents[$id] = $newContent;
@@ -126,6 +127,7 @@ class HomeAds
             return;
 
         $file = fopen($this->filePath, 'w');
+
         for ($i = 0; $i < count($this->adsTitles); ++$i)
         {
             $title = htmlspecialchars_decode($this->adsTitles[$i]);
@@ -139,6 +141,8 @@ class HomeAds
             $ad .= "\n<CONTINUT>\n" . $content . "</CONTINUT>\n";
             fwrite($file, $ad);
         }
+        $this->fileUpToDate = true;
+        
         fclose($file);
     }
 }

@@ -14,6 +14,20 @@ class PresentationController extends Controller
         $titles = $getAdsModel->GetTitles();
         $contents = $getAdsModel->GetContents();
 
+        $ads = '';
+        $buttons = '';
+        for ($i = 0; $i < count($titles); ++$i)
+        {
+            $buttons .= '<button type="button" data-bs-target="#news" data-bs-slide-to="' . (string)($i + 1) . '"></button>';
+
+            $ads .= '<div class="carousel-item" data-bs-interval="10000">
+                        <div class="carousel-caption anunt">
+                            <h1>' . $titles[$i] . '</h1>
+                            ' . $contents[$i] . '
+                        </div>
+                    </div>';
+        }
+
         // Incarca datele de contact/program afisate la finalul paginii
         extract(ContactProgramDetails::Get());
 
