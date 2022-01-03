@@ -7,8 +7,8 @@ require_once "models/ErrorCollector.php";
 
 class reCAPTCHA
 {
-    static private string $secretKey = '6LeD0-odAAAAAD8KaqOnf21vY5qqjJvIpwkwQZ3X';
-    static private string $siteKey = '6LeD0-odAAAAAHqXEM5Hw_3-0XBFOez0bxguSAPM';
+    static private string $secretKey = '-';
+    static private string $siteKey = '-';
 
     private array $response;  // informatii intoarse (JSON): https://developers.google.com/recaptcha/docs/verify
     private $errCollector;
