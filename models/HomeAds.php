@@ -1,14 +1,24 @@
 <?php
 
+require_once "models/ErrorCollector.php";
+
 class HomeAds
 {
+    private array $adsTitles = array();  // [titlu]
+    private array $adsContents = array();  // [continut]
+
     private string $filePath = 'files/HomeAds.txt';
     private bool $fileLoaded = false;
     private bool $fileUpToDate = true;
 
-    private array $adsTitles = array();  // [titlu]
-    private array $adsContents = array();  // [continut]
+    private ErrorCollector $errCollector;
+    private string $errorLogContext;
 
+    public function __construct(string $errorLogContext)
+    {
+        $this->errorLogContext = $errorLogContext . '->' .'AdsModel';
+        $this->errCollector = new ErrorCollector($this->errorLogContext);
+    }
 
     public function LoadAdsFile() : void
     {
@@ -16,6 +26,11 @@ class HomeAds
             return;
 
         $file = fopen($this->filePath, 'r');
+        if ($file === false)
+        {
+            $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Citire: Fisierul cu anunturi nu a putut fi deschis');
+            return;
+        }
 
         $line = "";
         while (!feof($file))  // cat timp exista anunturi
@@ -58,6 +73,8 @@ class HomeAds
         $this->fileUpToDate = true;
         
         fclose($file);
+        if ($file === false)
+            $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Citire: Fisierul cu anunturi nu a putut fi inchis');
     }
 
     public function NewAd(string $title, string $content) : bool
@@ -127,6 +144,11 @@ class HomeAds
             return;
 
         $file = fopen($this->filePath, 'w');
+        if ($file === false)
+        {
+            $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Scriere: Fisierul cu anunturi nu a putut fi deschis');
+            return;
+        }
 
         for ($i = 0; $i < count($this->adsTitles); ++$i)
         {
@@ -144,6 +166,8 @@ class HomeAds
         $this->fileUpToDate = true;
         
         fclose($file);
+        if ($file === false)
+            $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Scriere: Fisierul cu anunturi nu a putut fi inchis');
     }
 }
 

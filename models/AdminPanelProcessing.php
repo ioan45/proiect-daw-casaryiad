@@ -1,5 +1,6 @@
 <?php
 
+require_once "models/ErrorCollector.php";
 require_once "models/DatabaseOps.php";
 require_once "models/HomeAds.php";
 
@@ -9,11 +10,13 @@ class AdminPanelProcessing
     private string $head;
     private string $body;
 
+    private ErrorCollector $errCollector;
     private string $errorLogContext;
 
     public function __construct(string $errorLogContext)
     {
         $this->errorLogContext = $errorLogContext . '->' .'AdminPanelProc';
+        $this->errCollector = new ErrorCollector($this->errorLogContext);
     }
 
     public function MakePanelContent(array $getArgs, array $postArgs) : string
@@ -142,7 +145,7 @@ class AdminPanelProcessing
 
     private function AdsContentSection(array $getArgs, array $postArgs, string $formsToken) : string
     {
-        $adsModel = new HomeAds();
+        $adsModel = new HomeAds($this->errorLogContext);
         $toModifyID = -1;
 
         if (!empty($getArgs['op']))

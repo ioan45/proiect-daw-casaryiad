@@ -9,7 +9,7 @@ class PresentationController extends Controller
 {
     public function index() : void  // pagina acasa 
     {
-        $getAdsModel = new HomeAds;
+        $getAdsModel = new HomeAds("PresentCtrl");
         $getAdsModel->LoadAdsFile();
         $titles = $getAdsModel->GetTitles();
         $contents = $getAdsModel->GetContents();
