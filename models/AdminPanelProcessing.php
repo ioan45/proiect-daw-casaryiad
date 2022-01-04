@@ -81,50 +81,58 @@ class AdminPanelProcessing
 
         if (!empty($postArgs['comandaSQL']))
         {
-            $db = new DatabaseOps($this->errorLogContext . '->InputSQL');
+            $adminQuery = trim($postArgs['comandaSQL']);
 
-            $adminQuery = $postArgs['comandaSQL'];
-            $result = $db->query($adminQuery);
-
-            if ($result === true)
-                $content .= '<h3>COMANDA A FOST EXECUTATĂ CU SUCCES.</h3>';
-            else if ($result === false)
+            if (!in_array(strtoupper(substr($adminQuery, ($adminQuery[0] == '(' ? 1 : 0), 6)), array('SELECT', 'INSERT', 'UPDATE', 'DELETE')))
             {
-                $errorMsg = $db->GetQueryErrorMsg();
                 $content .= "<h3>COMANDA NU A PUTUT FI EXECUTATĂ.</h3>";
-                $content .= "<p>EROARE: $errorMsg.</p>";
+                $content .= "<p>EROARE: Comenzile SQL de acest tip sunt interzise.</p>";
             }
             else
             {
-                $rowsCount = count($result);
-                $content .= '<h3>COMANDA A FOST EXECUTATĂ CU SUCCES.</h3>';
-                $content .= "<p>$rowsCount LINII RETURNATE</p>";
-
-                if ($rowsCount > 0)
+                $db = new DatabaseOps($this->errorLogContext . '->InputSQL');
+                $result = $db->query($adminQuery);
+                
+                if ($result === true)
+                    $content .= '<h3>COMANDA A FOST EXECUTATĂ CU SUCCES.</h3>';
+                else if ($result === false)
                 {
-                    $content .=
-                        '<div class="table-responsive text-start">
-                            <table class="tabel-sql table table-striped table-bordered table-sm align-middle">
-                                <thead class="table-dark">
-                                    <tr>';
-                    foreach ($result[0] as $column => $value)
-                            $content .= "<th scope=\"col\">$column</th>";
-                    $content .=     '</tr>
-                                </thead>
-                                <tbody>';
-                    foreach ($result as $idx => $row)
+                    $errorMsg = $db->GetQueryErrorMsg();
+                    $content .= "<h3>COMANDA NU A PUTUT FI EXECUTATĂ.</h3>";
+                    $content .= "<p>EROARE: $errorMsg.</p>";
+                }
+                else
+                {
+                    $rowsCount = count($result);
+                    $content .= '<h3>COMANDA A FOST EXECUTATĂ CU SUCCES.</h3>';
+                    $content .= "<p>$rowsCount LINII RETURNATE</p>";
+
+                    if ($rowsCount > 0)
                     {
-                        $content .= '<tr>';
-                        foreach ($row as $column => $value)
+                        $content .=
+                            '<div class="table-responsive text-start">
+                                <table class="tabel-sql table table-striped table-bordered table-sm align-middle">
+                                    <thead class="table-dark">
+                                        <tr>';
+                        foreach ($result[0] as $column => $value)
+                                $content .= "<th scope=\"col\">$column</th>";
+                        $content .=     '</tr>
+                                    </thead>
+                                    <tbody>';
+                        foreach ($result as $idx => $row)
                         {
-                            $val = is_null($value) ? '<em>NULL</em>' : $value;
-                            $content .= "<td>$val</td>";
+                            $content .= '<tr>';
+                            foreach ($row as $column => $value)
+                            {
+                                $val = is_null($value) ? '<em>NULL</em>' : $value;
+                                $content .= "<td>$val</td>";
+                            }
+                            $content .= '</tr>';
                         }
-                        $content .= '</tr>';
+                        $content .= '</tbody>
+                                </table>
+                            </div>';
                     }
-                    $content .= '</tbody>
-                            </table>
-                        </div>';
                 }
             }
         }
