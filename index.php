@@ -36,6 +36,7 @@ $router->AddRoute('/autentificare/procesare', 'AccountController', 'LoginProcess
 $router->AddRoute('/inregistrare', 'AccountController', 'RegistrationPage');
 $router->AddRoute('/inregistrare/procesare', 'AccountController', 'RegistrationProcessing');
 $router->AddRoute('/utilizator/logout', 'AccountController', 'LogoutProcessing');
+$router->AddRoute('/utilizator/stergere', 'AccountController', 'DeleteProcessing');
 
 $router->AddRoute('/administrator', 'AdminController');
 

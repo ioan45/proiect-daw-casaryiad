@@ -230,6 +230,7 @@ class AdminPanelProcessing
         }
 
         // Formular pentru inserare
+        
         $content .= '<form class="cadru container-sm d-flex" action="/administrator?section=ads&op=ins" method="POST">
                         <div class="anunt container-fluid">
                             <label for="insTitle" class="form-label">Titlu</label>

@@ -19,13 +19,13 @@ class ReservFormProcessing
         $this->errCollector = new ErrorCollector($this->errorLogContext);
     }
     
-    public function ProcessForm() : void
+    public function ProcessForm() : bool
     {
         if (!$this->ValidRequestReferer())  // Se verifica daca cererea HTTP a fost trimisa prin mijloace de pe acest site (acelasi HOST)
         {
             $this->title = 'Formular Netrimis!';
             $this->head = 'Trimitere eșuată :(';
-            $this->body = 'Ne pare rău, a intervenit o problemă in transmiterea formularului. Incercați mai târziu.';
+            $this->body = 'Ne pare rău, a intervenit o problemă în transmiterea formularului. Incercați mai târziu.';
         }
         else if (!isset($_POST['tokenFormular']) || !isset($_SESSION['tokenFormular']) || $_POST['tokenFormular'] != $_SESSION['tokenFormular'])
         {
@@ -33,7 +33,7 @@ class ReservFormProcessing
 
             $this->title = 'Formular Netrimis!';
             $this->head = 'Trimitere eșuată :(';
-            $this->body = 'Ne pare rău, a intervenit o problemă in transmiterea formularului. Incercați mai târziu.';
+            $this->body = 'Ne pare rău, a intervenit o problemă în transmiterea formularului. Incercați mai târziu.';
         }
         else if (!$this->ValidCAPTCHA())
         {
@@ -127,17 +127,19 @@ class ReservFormProcessing
 
                     $this->title = 'Formular Trimis!';
                     $this->head = 'Trimitere reușită :)';
-                    $this->body = 'Formularul a fost trimis. În următoarea perioada vă vom contacta prin telefon/email ' . 
+                    $this->body = 'Formularul a fost trimis. În următoarea perioadă vă vom contacta prin telefon/email ' . 
                                   'pentru a vă transmite un răspuns cu privire la rezervarea dorită.';
-                    return;
+                    return true;
                 }
             }
             $this->title = 'Formular Netrimis!';
             $this->head = 'Trimitere eșuată :(';
-            $this->body = 'Ne pare rău, a intervenit o problemă in transmiterea formularului. Incercați mai târziu.';
+            $this->body = 'Ne pare rău, a intervenit o problemă în transmiterea formularului. Incercați mai târziu.';
 
             unset($db);
         }
+
+        return false;
     }
 
     private function ValidFormFields() : bool

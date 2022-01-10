@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/views/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/APIs/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/views/css/Common.css">
         <link rel="stylesheet" href="/views/css/EventForm.css">
         <title>Fă o rezervare! | Casa Ryiad</title>
@@ -92,7 +92,7 @@
 
         <?php include_once "views/common_parts/footer.php" ?>
 
-        <script src="/views/js/bootstrap.min.js"></script>
+        <script src="/APIs/bootstrap/bootstrap.min.js"></script>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </body>
 </html>

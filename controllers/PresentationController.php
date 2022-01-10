@@ -2,6 +2,7 @@
 
 require_once "controllers/Controller.php";
 require_once "models/HomeAds.php";
+require_once "models/Tips.php";
 require_once "models/ContactProgramDetails.php";
 require_once "models/DatabaseOps.php";
 
@@ -9,11 +10,15 @@ class PresentationController extends Controller
 {
     public function index() : void  // pagina acasa 
     {
+        $this->PageAccessDbLog('PagAcasa', 'PresentCtrl');
+
+        // Anunturi
+
         $getAdsModel = new HomeAds("PresentCtrl");
         $getAdsModel->LoadAdsFile();
         $titles = $getAdsModel->GetTitles();
         $contents = $getAdsModel->GetContents();
-
+ 
         $ads = '';
         $buttons = '';
         for ($i = 0; $i < count($titles); ++$i)
@@ -28,14 +33,45 @@ class PresentationController extends Controller
                     </div>';
         }
 
+        // Sfaturi
+
+        $getTipsModel = new Tips("PresentCtrl");
+        $getTipsModel->LoadTips();
+        $tipsParts = $getTipsModel->GetTips();
+
+        $tips = '';
+        foreach ($tipsParts as $tipParts) 
+        {
+            $tips .= '<div class="sfat my-4 p-3">
+                          <b>'. $tipParts['antet'] .'</b>
+                          <p>&emsp;' . $tipParts['text'] . '</p>
+                      </div>';
+        }
+
+        // Statistici
+
+        $db = new DatabaseOps('PresentCtrl');
+        $qresult = $db->query("SELECT count(*) as \"afisari\", 
+                                      count(distinct id_sesiune) as \"vizite\", 
+                                      count(distinct ip_vizitator) as \"vizitatori\" 
+                                FROM accesare
+                                WHERE lower(actiune) = 'pagacasa' AND date(data) = CURDATE()");
+        $statViews = $qresult[0]['afisari'];
+        $statVisits = $qresult[0]['vizite'];
+        $statVisitors = $qresult[0]['vizitatori'];
+        $statOnlineVisitors = $db->query("SELECT count(distinct ip_vizitator) as \"viz_online\" 
+                                          FROM accesare
+                                          WHERE lower(actiune) = 'pagacasa' AND data > now() - interval 5 minute")[0]['viz_online'];
+
         // Incarca datele de contact/program afisate la finalul paginii
         extract(ContactProgramDetails::Get());
-
         require_once "views/Home.php";
     }
     
     public function events() : void
     {
+        $this->PageAccessDbLog('PagEvenimente', 'PresentCtrl');
+
         $db = new DatabaseOps('PresentCtrl');
         $menus = $db->query("SELECT denumire, pret FROM meniu");
         $menusElems = $db->query("SELECT m.denumire as 'den_meniu', em.denumire as 'den_elem' " .
@@ -49,6 +85,8 @@ class PresentationController extends Controller
 
     public function about() : void
     {
+        $this->PageAccessDbLog('PagDespre', 'PresentCtrl');
+
         extract(ContactProgramDetails::Get());
         require_once "views/About.php";
     }

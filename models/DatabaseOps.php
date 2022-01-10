@@ -65,14 +65,14 @@ class DatabaseOps
         return false;
     }
     
-    public function rollback() : bool 
-    {
-        if ($this->db_connection->rollback())
-            return true;
-       
-        $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Rollback esuat: ' . $this->db_connection->error);
-        return false;
-    }
+    // public function rollback() : bool 
+    // {
+    //     if ($this->db_connection->rollback())
+    //         return true;
+        
+    //     $this->errCollector->addError(date("Y-m-d h:i:sa"), 'Rollback esuat: ' . $this->db_connection->error);
+    //     return false;
+    // }
 
     public function ping() : bool 
     { 

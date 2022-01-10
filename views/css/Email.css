@@ -1,0 +1,55 @@
+header
+{
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-bottom: none;
+}
+header #logo
+{
+    display: block;
+    width: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    backdrop-filter: brightness(50%);
+}
+body
+{
+    overflow-x: hidden;
+}
+#fundal
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    min-height: 100%;
+
+    width: 100%;
+        
+    z-index: -30;
+    filter: brightness(100%);
+}
+.corp_mail
+{
+    background-color: #D8D8D8;
+    border: 2px double black;
+    color: black;
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+.corp_mail h1
+{
+    font-family: 'Trebuchet MS';
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+.corp_mail p
+{
+    font-family: sans-serif;
+    font-size: larger;
+}

@@ -7,6 +7,8 @@ class AdminController extends Controller
 {
     public function index() : void
     {
+        $this->PageAccessDbLog('PanouAdmin', 'AdminCtrl');
+
         $getArgs = array_merge($_GET);
         $postArgs = array_merge($_POST);
 

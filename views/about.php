@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/views/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/APIs/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/views/css/Common.css">
         <link rel="stylesheet" href="/views/css/About.css">
         <title>Despre proiect</title>
@@ -20,6 +20,7 @@
                Grupa: 234<br>
                Tema aleasa: Organizare de evenimente
             </p><br>
+            <h2 style="color: red;">Descrierea nu este actualizata (exceptand diagrama)</h2>
             <p class="fs-5">
                 &emsp;&emsp; Se prezinta un site al unui restaurant ce ofera clientilor posibilitatea de a organiza evenimente de tipul 
                 Nunta, Botez, Petreceri private sau Evenimente Corporate intr-un spatiu special amenajat. Pe langa o scurta prezentare a 
@@ -42,7 +43,7 @@
                 deja existente in baza de date.
             </p>
             <p class="fs-5">
-                Diagrama Entitate-Relatie a bazei de date (baza de date corespunde doar aplicatiei web, nu a intregului restaurant):
+                Diagrama <b>Entitate-Relatie</b> a bazei de date (baza de date corespunde doar aplicatiei web, nu a intregului restaurant):
             </p>
             <img id="diagrama" src="/images/diagrama-er.png" class="img-fluid"><br>
             <p class="fs-5">
@@ -76,6 +77,6 @@
             </p>
         </section>
 
-        <script src="/views/js/bootstrap.min.js"></script>
+        <script src="/APIs/bootstrap/bootstrap.min.js"></script>
     </body>
 </html>

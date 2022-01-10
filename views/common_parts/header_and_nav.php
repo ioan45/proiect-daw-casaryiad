@@ -44,6 +44,13 @@
                         echo '<li class="nav-item">';
                         echo '      <a class="nav-link" href="/utilizator/logout">DECONECTEAZĂ-TE</a>';
                         echo '</li>';
+                        if (isset($_SESSION['UtilizatorTip']) && strtoupper($_SESSION['UtilizatorTip']) != 'ADMIN')
+                        {
+                            echo '<hr class="text-light my-1 d-md-none">';
+                            echo '<li class="nav-item">';
+                            echo '      <a class="nav-link" href="/utilizator/stergere">ȘTERGERE CONT</a>';
+                            echo '</li>';
+                        }
                     }
                     else
                     {

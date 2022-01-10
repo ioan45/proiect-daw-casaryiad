@@ -61,7 +61,7 @@ class AccountProcessing
         }
         else
         {
-            $db = new DatabaseOps($this->errorLogContext);
+            $db = new DatabaseOps($this->errorLogContext . '->Login');
 
             $id = $db->EscapeString($_POST['Utilizator']);
             $password = $db->EscapeString($_POST['Parola']);
@@ -97,10 +97,11 @@ class AccountProcessing
     {
         if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['UtilizatorID']))  // sesiune activa si utilizator autentificat
         {
-            $db = new DatabaseOps($this->errorLogContext);
+            $db = new DatabaseOps($this->errorLogContext . '->Logout');
             $actTime = date('Y-m-d H:i:s');
             $actTime = "STR_TO_DATE($actTime, '%Y%m%d %h%i%s')";
             $codUtiliz = $_SESSION['UtilizatorCod'];
+
             $db->query("INSERT INTO activitate VALUES (NULL, $codUtiliz, 'LOGOUT', default)");
 
             unset($_SESSION['UtilizatorID']);
@@ -112,7 +113,7 @@ class AccountProcessing
         die();
     }
 
-    public function ProcessRegistration() : void
+    public function ProcessRegistration() : bool
     {
         if (session_status() != PHP_SESSION_ACTIVE)  // sesiune inactiva/dezactivata
         {
@@ -153,7 +154,7 @@ class AccountProcessing
         }
         else
         {
-            $db = new DatabaseOps($this->errorLogContext);
+            $db = new DatabaseOps($this->errorLogContext . '->Register');
 
             $fieldID = $db->EscapeString($_POST['Utilizator']);
             $fieldPassword = $db->EscapeString($_POST['Parola']);
@@ -192,7 +193,7 @@ class AccountProcessing
 
                             unset($_SESSION['tokenFormular']);  // dupa transmitere cu succes, sesiunea formularului se incheie
 
-                            return;
+                            return true;
                         }
                     }
                 }
@@ -201,6 +202,31 @@ class AccountProcessing
                 $this->body = 'Ne pare rău, înregistrarea nu a putut fi efectuată cu succes. Încearcă mai târziu.';
             }
         }
+
+        return false;
+    }
+
+    public function ProcessDelete() : void
+    {
+        if (session_status() == PHP_SESSION_ACTIVE && 
+            isset($_SESSION['UtilizatorTip']) && 
+            strtoupper($_SESSION['UtilizatorTip']) != 'ADMIN')   // client autentificat
+        {
+            $db = new DatabaseOps($this->errorLogContext . '->Delete');
+            $actTime = date('Y-m-d H:i:s');
+            $actTime = "STR_TO_DATE($actTime, '%Y%m%d %h%i%s')";
+            $codUtiliz = $_SESSION['UtilizatorCod'];
+
+            $db->query("INSERT INTO activitate VALUES (NULL, $codUtiliz, 'CONT_STERS', default)");
+            $db->query("UPDATE utilizator SET stare = 'STERS' WHERE cod_utilizator = $codUtiliz");
+
+            unset($_SESSION['UtilizatorID']);
+            unset($_SESSION['UtilizatorTip']);
+            unset($_SESSION['UtilizatorCod']);
+        }
+
+        header('Location: /', true, 301);
+        die();   
     }
 
     private function ValidCAPTCHA() : bool

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/views/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/APIs/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/views/css/Common.css">
         <link rel="stylesheet" href="/views/css/Home.css">
         <title>Casa Ryiad</title>
@@ -70,8 +70,34 @@
             </section>
         </section>
 
+        <section class="container-sm sfaturi px-sm-5 rounded-3">
+            <h2>Sfaturi pentru organizarea unei petreceri corporate de succes</h2>
+            <?=$tips?>
+        </section>
+
+        <section class="container-sm statistici py-3 rounded-3">
+            <div class="row gy-5">
+                <div class="col">
+                    <span><?=$statOnlineVisitors?></span><br>
+                    VIZITATORI<br>ONLINE
+                </div>
+                <div class="col">
+                    <span><?=$statVisitors?></span><br>
+                    VIZITATORI<br>ASTĂZI
+                </div>
+                <div class="col">
+                    <span><?=$statVisits?></span><br>
+                    VIZITE<br>ASTĂZI
+                </div>
+                <div class="col">
+                    <span><?=$statViews?></span><br>
+                    AFIȘĂRI<br>ASTĂZI
+                </div>
+            </div>
+        </section>
+
         <?php include_once "views/common_parts/footer.php" ?>
 
-        <script src="/views/js/bootstrap.min.js"></script>
+        <script src="/APIs/bootstrap/bootstrap.min.js"></script>
     </body>
 </html>

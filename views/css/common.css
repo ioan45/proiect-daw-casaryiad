@@ -8,6 +8,11 @@
     font-family: "Revans Medium";
     src: url("/views/other_resources/RevansMedium.otf");
 }
+@font-face
+{
+    font-family: "Claimcheck";
+    src: url("/views/other_resources/NumbersClaimcheck.ttf");
+}
 
 header
 {
