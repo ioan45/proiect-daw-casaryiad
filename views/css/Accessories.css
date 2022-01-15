@@ -1,0 +1,42 @@
+nav #accesorii
+{
+   background-color: #D8D8D8 !important;
+   color: #000000 !important;
+}
+.accesorii
+{
+   background-color: #E8E8E8;
+   filter: drop-shadow(3px 3px 4px black);
+   margin-top: 50px;
+   margin-bottom: 50px;
+}
+.accesorii 
+{
+   padding-top: 20px;
+   padding-bottom: 20px;
+   padding-left: 50px;
+   padding-right: 50px;
+
+}
+.accesorii input
+{
+   max-width: 100px;
+   margin-bottom: 10px;
+}
+.accesorii .continut
+{
+   margin-top: 50px;
+   color: black !important;
+}
+.accesorii .continut p span
+{
+   margin-left: 10px;
+}
+.accesorii .continut h3
+{
+   margin-bottom: 50px;
+}
+footer
+{
+   margin-top: 0;
+}

@@ -70,11 +70,6 @@
             </section>
         </section>
 
-        <section class="container-sm sfaturi px-sm-5 rounded-3">
-            <h2>Sfaturi pentru organizarea unei petreceri corporate de succes</h2>
-            <?=$tips?>
-        </section>
-
         <section class="container-sm statistici py-3 rounded-3">
             <div class="row gy-5">
                 <div class="col">

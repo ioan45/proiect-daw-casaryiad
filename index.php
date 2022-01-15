@@ -27,6 +27,7 @@ $router = new Router('index', 'NotFoundController');
 $router->AddRoute('/', 'PresentationController');
 $router->AddRoute('/evenimente', 'PresentationController', 'events');
 $router->AddRoute('/despre', 'PresentationController', 'about');
+$router->AddRoute('/accesorii', 'PresentationController', 'accessories');
 
 $router->AddRoute('/rezervare', 'EventReservController');
 $router->AddRoute('/rezervare/trimite', 'EventReservController', 'FormSent');
@@ -35,6 +36,7 @@ $router->AddRoute('/autentificare', 'AccountController', 'LoginPage');
 $router->AddRoute('/autentificare/procesare', 'AccountController', 'LoginProcessing');
 $router->AddRoute('/inregistrare', 'AccountController', 'RegistrationPage');
 $router->AddRoute('/inregistrare/procesare', 'AccountController', 'RegistrationProcessing');
+$router->AddRoute('/inregistrare/confirmare', 'AccountController', 'RegistrationConf');
 $router->AddRoute('/utilizator/logout', 'AccountController', 'LogoutProcessing');
 $router->AddRoute('/utilizator/stergere', 'AccountController', 'DeleteProcessing');
 

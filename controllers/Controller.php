@@ -18,7 +18,7 @@ abstract class Controller
         {
             $db = new DatabaseOps($errorLogContext . '->PageAccessLog');
 
-            $ip = $_SERVER['REMOTE_ADDR'];
+            $ip = sha1($_SERVER['REMOTE_ADDR']);
             $sessionID = session_id();
 
             $db->query("INSERT INTO accesare VALUES (null, default, '$ip', '$sessionID', '$pageName')");

@@ -2,7 +2,7 @@
 
 require_once "controllers/Controller.php";
 require_once "models/HomeAds.php";
-require_once "models/Tips.php";
+require_once "models/AccessoriesModel.php";
 require_once "models/ContactProgramDetails.php";
 require_once "models/DatabaseOps.php";
 
@@ -31,21 +31,6 @@ class PresentationController extends Controller
                             ' . $contents[$i] . '
                         </div>
                     </div>';
-        }
-
-        // Sfaturi
-
-        $getTipsModel = new Tips("PresentCtrl");
-        $getTipsModel->LoadTips();
-        $tipsParts = $getTipsModel->GetTips();
-
-        $tips = '';
-        foreach ($tipsParts as $tipParts) 
-        {
-            $tips .= '<div class="sfat my-4 p-3">
-                          <b>'. $tipParts['antet'] .'</b>
-                          <p>&emsp;' . $tipParts['text'] . '</p>
-                      </div>';
         }
 
         // Statistici
@@ -81,6 +66,49 @@ class PresentationController extends Controller
 
         extract(ContactProgramDetails::Get());
         require_once "views/Events.php";
+    }
+
+    public function accessories() : void
+    {
+        $content = '';
+        $minGiven = -1;
+        $maxGiven = -1;
+
+        $accsModel = new Accessories('PresentCtrl');
+        if (empty($_GET['minim']) || empty($_GET['maxim']))
+            $accsModel->ParseForPriceRange();
+        else if (!is_numeric($_GET['minim']) || !is_numeric($_GET['maxim']))
+        {
+            $accsModel->ParseForPriceRange();
+            $content .= '<h3>Parametrii dați nu sunt valizi.</h3>';
+        }
+        else
+        {            
+            $accsModel->ParseForResults((int)$_GET['minim'], (int)$_GET['maxim']);
+
+            $minGiven = $_GET['minim'];
+            $maxGiven = $_GET['maxim'];
+
+            $results = $accsModel->GetResults();
+            foreach ($results as $product) 
+                $content .= '<p><a href="' . $product[2] . '">' . $product[0] . '</a>' . 
+                            '<span class="pret_accesoriu">(' . $product[1] . ' Lei)</span></p>';            
+
+            if (empty($content))
+                $content .= '<h3>Nu există produse pentru categoria de preț dată.</h3>';
+        }
+
+        $minPrice = $accsModel->GetMinPrice();
+        $maxPrice = $accsModel->GetMaxPrice();
+
+        if ($minGiven == -1 || $maxGiven == -1)
+        {
+            $minGiven = $minPrice;
+            $maxGiven = $maxPrice;
+        }
+
+        extract(ContactProgramDetails::Get());
+        require_once "views/Accessories.php";
     }
 
     public function about() : void

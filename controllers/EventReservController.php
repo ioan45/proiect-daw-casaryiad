@@ -64,11 +64,11 @@ class EventReservController extends Controller
 
             $db = new DatabaseOps('EventRsvCtrl');
             $userCode = $_SESSION['UtilizatorCod'];
-            $clientInfo = $db->query("SELECT nume, prenume, email FROM client WHERE cod_utilizator = $userCode")[0];
+            $clientInfo = $db->query("SELECT nume, prenume FROM client WHERE cod_utilizator = $userCode")[0];
 
             if (!empty($clientInfo))
             {
-                $to = $clientInfo['email'];
+                $to = $_SESSION['UtilizatorEmail'];
                 $recipientName = $clientInfo['prenume'] . ' ' . $clientInfo['nume'];
                 $subject = 'Formular eveniment';
 

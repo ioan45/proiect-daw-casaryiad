@@ -3,6 +3,7 @@
 require_once "models/ErrorCollector.php";
 require_once "models/DatabaseOps.php";
 require_once "models/reCAPTCHA.php";
+require_once "models/Mailer.php";
 
 class AccountProcessing
 {
@@ -66,10 +67,9 @@ class AccountProcessing
             $id = $db->EscapeString($_POST['Utilizator']);
             $password = $db->EscapeString($_POST['Parola']);
 
-            $exist = $db->query("SELECT cod_utilizator, tip, stare FROM utilizator WHERE id='$id' AND parola='$password'");
-            if (empty($exist) || strtoupper($exist[0]['stare']) == 'STERS')
+            $userInfo = $db->query("SELECT cod_utilizator, tip, stare, parola, email FROM utilizator WHERE id='$id' AND stare='ACTIV'");
+            if (empty($userInfo) || !password_verify($_POST['Parola'], $userInfo[0]['parola']))
             {
-                // Date incorecte
                 $_SESSION['AutEsuata'] = 'Date incorecte';
                 header('Location: /autentificare', true, 301);
                 die();
@@ -77,12 +77,13 @@ class AccountProcessing
             else
             {
                 $_SESSION['UtilizatorID'] = $_POST['Utilizator'];
-                $_SESSION['UtilizatorTip'] = $exist[0]['tip'];
-                $_SESSION['UtilizatorCod'] = $exist[0]['cod_utilizator'];
+                $_SESSION['UtilizatorTip'] = $userInfo[0]['tip'];
+                $_SESSION['UtilizatorCod'] = $userInfo[0]['cod_utilizator'];
+                $_SESSION['UtilizatorEmail'] = $userInfo[0]['email'];
 
                 $actTime = date('Y-m-d H:i:s');
                 $actTime = "STR_TO_DATE($actTime, '%Y%m%d %h%i%s')";
-                $userID = $exist[0]['cod_utilizator'];
+                $userID = $userInfo[0]['cod_utilizator'];
                 $db->query("INSERT INTO activitate VALUES (NULL, $userID, 'LOGIN', default)");
 
                 unset($_SESSION['tokenFormular']);  // dupa transmitere cu succes, sesiunea formularului se incheie
@@ -107,6 +108,7 @@ class AccountProcessing
             unset($_SESSION['UtilizatorID']);
             unset($_SESSION['UtilizatorTip']);
             unset($_SESSION['UtilizatorCod']);
+            unset($_SESSION['UtilizatorEmail']);
         }
 
         header('Location: /', true, 301);
@@ -157,42 +159,46 @@ class AccountProcessing
             $db = new DatabaseOps($this->errorLogContext . '->Register');
 
             $fieldID = $db->EscapeString($_POST['Utilizator']);
-            $fieldPassword = $db->EscapeString($_POST['Parola']);
+            $fieldPassword = password_hash($_POST['Parola'], PASSWORD_DEFAULT);
             $fieldLastName = $db->EscapeString($_POST['Nume']);
             $fieldFirstName = $db->EscapeString($_POST['Prenume']);
             $fieldEmail = $db->EscapeString($_POST['Email']);
             $fieldPhone = $db->EscapeString($_POST['Telefon']);
 
-            $exist = $db->query("SELECT 1 FROM utilizator WHERE id='$fieldID'");
+            // Se verifica existenta unui alt cont (ce nu este sters) cu informatiile date
+            $exist = $db->query("SELECT id, email FROM utilizator WHERE stare != 'STERS' AND (id='$fieldID' or email='$fieldEmail')");
             if (!empty($exist))
             {
-                unset($db);
+                if ($exist[0]['id'] == $fieldID)
+                    $_SESSION['InregEsuata'] = 'Există deja un cont cu acest nume de utilizator.';
+                else
+                    $_SESSION['InregEsuata'] = 'Există deja un cont cu acest email.';
 
-                $_SESSION['InregEsuata'] = 'Există deja un cont cu acest nume de utilizator.';
                 header('Location: /inregistrare', true, 301);
                 die();
             }
             else
-            {
-                $qResult = $db->query("INSERT INTO utilizator values (NULL, 'CLIENT', 'ACTIV', '$fieldID', '$fieldPassword', default)");
+            {   
+                $emailToken = $this->GetEmailToken();
+                $qResult = $db->query("INSERT INTO utilizator values (NULL, 'CLIENT', 'INACTIV', '$fieldID', '$fieldPassword', '$fieldEmail', '$emailToken', default)");
                 if ($qResult)
                 {
-                    $userID = $db->query("SELECT cod_utilizator FROM utilizator WHERE id='$fieldID'");
-                    if (!empty($userID))
+                    $userCode = $db->query("SELECT cod_utilizator FROM utilizator WHERE stare='INACTIV' AND id='$fieldID' AND cod_verif_email='$emailToken'");
+                    if (!empty($userCode))
                     {
-                        $id = $userID[0]['cod_utilizator'];
-                        $qResult = $db->query("INSERT INTO client values (NULL, $id, '$fieldLastName', '$fieldFirstName', '$fieldPhone', '$fieldEmail')");
+                        $userCode = $userCode[0]['cod_utilizator'];
+                        $qResult = $db->query("INSERT INTO client values (NULL, $userCode, '$fieldLastName', '$fieldFirstName', '$fieldPhone')");
                         if ($qResult)
                         {
-                            $userID = $userID[0]['cod_utilizator'];
-                            $db->query("INSERT INTO activitate values (NULL, $userID, 'CONT_CREAT', default)");
+                            $db->query("INSERT INTO activitate values (NULL, $userCode, 'CONT_CREAT', default)");
 
-                            $this->title = 'Înregistrare reușită';
-                            $this->head = 'Înregistrarea a fost efectuată cu succes! :)';
-                            $this->body = 'De acum, poți profita la maxim de serviciile noastre.';
+                            $this->SendVerifEmail($_POST['Email'], $_POST['Prenume'], $_POST['Nume'], $emailToken);
+
+                            $this->title = 'Verificare Înregistrare';
+                            $this->head = 'Înregistrarea este aproape gata.';
+                            $this->body = 'Mai trebuie doar sa îți verifici adresa de e-mail printr-un link trimis de noi.';
 
                             unset($_SESSION['tokenFormular']);  // dupa transmitere cu succes, sesiunea formularului se incheie
-
                             return true;
                         }
                     }
@@ -204,6 +210,39 @@ class AccountProcessing
         }
 
         return false;
+    }
+
+    public function RegistrationConf() : void
+    {
+        if (empty($_GET['email']) || empty($_GET['token']))
+            header('Location: /', true, 301);
+
+        $db = new DatabaseOps($this->errorLogContext . '->ConfirmEmail');
+        $fieldEmail = $db->EscapeString($_GET['email']);
+        $fieldToken = $db->EscapeString($_GET['token']);
+        
+        $userInfo = $db->query("SELECT cod_utilizator, stare FROM utilizator WHERE email='$fieldEmail' and cod_verif_email='$fieldToken'");
+        if (!empty($userInfo))
+        {
+            if ($userInfo[0]['stare'] != 'ACTIV')
+            {
+                $userCode = $userInfo[0]['cod_utilizator'];
+                $isActive = $db->query("UPDATE utilizator SET stare='ACTIV' WHERE cod_utilizator = $userCode");
+                if ($isActive)
+                {
+                    $db->query("INSERT INTO activitate values (NULL, $userCode, 'CONT_CONFIRMAT', default)");
+
+                    $this->title = 'Înregistrare reușită';
+                    $this->head = 'Înregistrarea a fost efectuată cu succes! :)';
+                    $this->body = 'De acum poți profita la maxim de serviciile noastre.';
+                    return;
+                }
+            }
+        }
+
+        $this->title = 'Confirmare eșuată';
+        $this->head = 'Confirmare eșuată :(';
+        $this->body = 'Ne pare rău, confirmarea nu a putut fi efectuată cu succes.';
     }
 
     public function ProcessDelete() : void
@@ -227,6 +266,41 @@ class AccountProcessing
 
         header('Location: /', true, 301);
         die();   
+    }
+
+    private function SendVerifEmail(string $to, string $firstName, string $lastName, string $emailToken) : void
+    {   
+        $recipientName = $firstName . ' ' . $lastName;
+        $subject = 'Confirmare Inregistrare';
+
+        $body = file_get_contents('views/Email.html');
+        $bodyTitle = 'Confirmare Inregistrare';
+        $bodyContent = '<p style="font-family: sans-serif; font-size: larger;">
+                            Salut ' . $firstName . ', <br>
+                            Înregistrarea ta pe site-ul nostru este aproape gata. <br>
+                            Te rugăm să accesezi link-ul următor pentru ca înregistrarea ta să fie validă.
+                        </p>
+                        '. "https://daw-casaryiad.000webhostapp.com/inregistrare/confirmare?email=$to&token=$emailToken" .'
+                        <p style="font-family: sans-serif; font-size: larger;">
+                            Îți mulțumim!
+                        </p>';
+        $body = str_replace('{TITLE}', $bodyTitle, $body);
+        $body = str_replace('{CONTENT}', $bodyContent, $body);
+        
+        $altBody = "Confirmare Inregistrare\n\n" .  
+                    "Salut " . $firstName . ", \n
+                    Înregistrarea ta pe site-ul nostru este aproape gata.\n
+                    Te rugăm să accesezi link-ul următor pentru ca înregistrarea ta să fie validă.\n\n 
+                    https://daw-casaryiad.000webhostapp.com/inregistrare/confirmare?email=$to&token=$emailToken"
+                    . "\n\nÎți mulțumim!\n"; 
+
+        $mailerModel = new Mailer($this->errorLogContext . '->SendVerifEmail');
+        $mailerModel->Mail($to, $recipientName, $subject, $body, $altBody);
+    } 
+
+    private function GetEmailToken() : string
+    {
+        return bin2hex(random_bytes(32));
     }
 
     private function ValidCAPTCHA() : bool
