@@ -4,6 +4,8 @@ require_once "models/ErrorCollector.php";
 
 
 /// Utilitar pentru operatiile cu reCAPTCHA
+/// 
+/// reCAPTCHA v2 "I'm not a robot" Checkbox
 
 class reCAPTCHA
 {
